@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by zhangke on 2017-1-14.
  */
-public class SimpleTreeAdapter<T,B> extends TreeListViewAdapter
+public class SimpleTreeAdapter extends TreeListViewAdapter
 {
     public SimpleTreeAdapter(ListView mTree, Context context, List<Node> datas, int defaultExpandLevel, int iconExpand, int iconNoExpand) {
         super(mTree, context, datas, defaultExpandLevel, iconExpand, iconNoExpand);
