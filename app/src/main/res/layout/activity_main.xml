@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <Button
+        android:onClick="goListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ListViewTree"
+        android:textColor="#000"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+    <Button
+        android:onClick="goRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RecyclerViewTree"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="20sp" />
+</LinearLayout>
