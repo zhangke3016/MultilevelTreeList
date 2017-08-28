@@ -53,12 +53,21 @@ public class TreeHelper {
     /**
      * 设置Node间，父子关系;让每两个节点都比较一次，即可设置其中的关系
      */
-    private static List<Node> convetData2Node(List<Node> nodes) {
+     private static List<Node> convetData2Node(List<Node> nodes) {
 
         for (int i = 0; i < nodes.size(); i++) {
             Node n = nodes.get(i);
             for (int j = i + 1; j < nodes.size(); j++) {
                 Node m = nodes.get(j);
+                if(m.getpId() instanceof String){
+                    if (m.getpId().equals(n.getId())) {
+                        n.getChildren().add(m);
+                        m.setParent(n);
+                    } else if (m.getId().equals(n.getpId())) {
+                        m.getChildren().add(n);
+                        n.setParent(m);
+                    }
+                }else{
                     if (m.getpId() == n.getId()) {
                         n.getChildren().add(m);
                         m.setParent(n);
@@ -66,9 +75,9 @@ public class TreeHelper {
                         m.getChildren().add(n);
                         n.setParent(m);
                     }
+                }
             }
         }
-
         return nodes;
     }
 
