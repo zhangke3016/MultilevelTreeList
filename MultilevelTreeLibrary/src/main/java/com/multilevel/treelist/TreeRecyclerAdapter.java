@@ -222,8 +222,8 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
             for (Node n:childrens){
                 removeDeleteNode(n);
             }
-            mAllNodes.remove(node);
         }
+         mAllNodes.remove(node);
     }
 
     /**
