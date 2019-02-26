@@ -87,7 +87,7 @@ public class ListViewActivity extends BaseActivity {
 
     public void delete(View view) {
         if (mAdapter.getAllNodes().size() > 0){
-            mAdapter.removeData(node);
+            mAdapter.removeData(mAdapter.getAllNodes().get(mAdapter.getAllNodes().size() - 1));
         }
     }
 
