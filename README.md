@@ -30,7 +30,7 @@ Multilevel tree list for Android.
 ##### 2. 在app的build里添加依赖
 ```groovy
     dependencies {
-        implementation 'com.github.zhangke3016:MultilevelTreeList:1.0.1'
+        implementation 'com.github.zhangke3016:MultilevelTreeList:1.0.2'
     }
 ```
 
