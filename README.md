@@ -15,7 +15,24 @@ Multilevel tree list for Android.
 
 ![MultilevelTreeList](gif/screen.gif)
 
-## USE
+## 接入
+##### 1. 在全局build里添加仓库
+```groovy
+    allprojects {
+                repositories {
+                    ......
+                    maven { url 'https://jitpack.io' }
+        }
+    }
+```
+##### 2. 在app的build里添加依赖
+```groovy
+    dependencies {
+        implementation 'com.github.zhangke3016:MultilevelTreeList:1.0.0'
+    }
+```
+
+## 使用
 
 我们关联列表树需要有三个必须元素，当前id、父级id即pid，显示的内容。id和pid可以为int或者String以及其他类型。要显示的内容需要包装一下：
 
@@ -219,3 +236,10 @@ public class SimpleTreeRecyclerAdapter extends TreeRecyclerAdapter {
             }
         });
 ```
+### About me
+
+A Android Developer in ShenZhen.
+
+【[**我的简书地址**](http://www.jianshu.com/users/3c751e06dc32/latest_articles)】
+
+【[**我的CSDN地址**](http://blog.csdn.net/zhangke3016)】
