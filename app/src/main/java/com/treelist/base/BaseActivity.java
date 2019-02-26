@@ -21,7 +21,7 @@ public class BaseActivity extends AppCompatActivity{
         initDatas();
 
     }
-
+    protected Node node;
     private void initDatas()
     {
         // id , pid , label , 其他属性
@@ -32,8 +32,8 @@ public class BaseActivity extends AppCompatActivity{
         mDatas.add(new Node(4+"", 1+"", "程序"));
         mDatas.add(new Node(5+"", 2+"", "war3"));
         mDatas.add(new Node(6+"", 2+"", "刀塔传奇"));
-
-        mDatas.add(new Node(7+"", 4+"", "面向对象"));
+         node = new Node(7 + "", 4 + "", "面向对象");
+        mDatas.add(node);
         mDatas.add(new Node(8+"", 4+"", "非面向对象"));
 
         mDatas.add(new Node(9+"", 7+"", "C++"));

@@ -19,6 +19,13 @@
         android:layout_height="wrap_content"
         android:text="显示选中数据"/>
 
+    <Button
+        android:onClick="delete"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="移除数据"/>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"

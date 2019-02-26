@@ -82,4 +82,10 @@ public class RecyclerViewActivity extends BaseActivity {
         if (!TextUtils.isEmpty(strNodesName))
              Toast.makeText(this, strNodesName.substring(0, strNodesName.length()-1),Toast.LENGTH_SHORT).show();
     }
+
+    public void delete(View view) {
+        if (mAdapter.getAllNodes().size() > 0){
+            mAdapter.removeData(node);
+        }
+    }
 }

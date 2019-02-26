@@ -33,12 +33,15 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
      * 默认不展开
      */
     private int defaultExpandLevel = 0;
+
     /** 展开与关闭的图片*/
     private int iconExpand = -1,iconNoExpand = -1;
+
     public void setOnTreeNodeClickListener(
             OnTreeNodeClickListener onTreeNodeClickListener) {
         this.onTreeNodeClickListener = onTreeNodeClickListener;
     }
+
     public TreeRecyclerAdapter(RecyclerView mTree, Context context, List<Node> datas,
                            int defaultExpandLevel, int iconExpand, int iconNoExpand) {
 
@@ -80,7 +83,7 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
         Node node = mNodes.get(position);
-//        convertView = getConvertView(node, position, convertView, parent);
+
         // 设置内边距
         holder.itemView.setPadding(node.getLevel() * 30, 3, 3, 3);
         /**
@@ -170,6 +173,57 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         nodes.add(node);
         this.defaultExpandLevel = defaultExpandLevel;
         notifyData(-1,nodes);
+    }
+
+    /**
+     * 移除node
+     * @param node
+     */
+    public void removeData(Node node) {
+        if (node == null){
+            return;
+        }
+        removeDeleteNode(node);
+        for (Node n:mAllNodes){
+            n.getChildren().clear();
+        }
+        mAllNodes = TreeHelper.getSortedNodes(mAllNodes, defaultExpandLevel);
+        mNodes = TreeHelper.filterVisibleNode(mAllNodes);
+        //刷新数据
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 批量移除node
+     * @param nodes
+     */
+    public void removeData(List<Node> nodes) {
+        if (nodes == null || nodes.isEmpty()){
+            return;
+        }
+        for (Node node:nodes){
+            removeDeleteNode(node);
+        }
+        for (Node n:mAllNodes){
+            n.getChildren().clear();
+        }
+        mAllNodes = TreeHelper.getSortedNodes(mAllNodes, defaultExpandLevel);
+        mNodes = TreeHelper.filterVisibleNode(mAllNodes);
+        //刷新数据
+        notifyDataSetChanged();
+    }
+
+    private void removeDeleteNode(Node node){
+        if (node == null){
+            return;
+        }
+        List<Node> childrens = node.getChildren();
+        if (childrens != null && !childrens.isEmpty()){
+            for (Node n:childrens){
+                removeDeleteNode(n);
+            }
+            mAllNodes.remove(node);
+        }
     }
 
     /**

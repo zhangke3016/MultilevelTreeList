@@ -56,13 +56,13 @@ public class ListViewActivity extends BaseActivity {
         //添加一个根节点
         mlist.add(new Node("223","0","我也是添加的root节点",new FileNode()));
 
-            //加在新节点上
-            mlist.add(new Node("333"+num,"22","我是添加的1"+num));
-            mlist.add(new Node("44444"+num,"22","我是添加的2"+num));
-            //加到现有数据的父节点上
-            mlist.add(new Node("444454"+num,"1","我是添加的3"+num));
+        //加在新节点上
+        mlist.add(new Node("333"+num,"22","我是添加的1"+num));
+        mlist.add(new Node("44444"+num,"22","我是添加的2"+num));
+        //加到现有数据的父节点上
+        mlist.add(new Node("444454"+num,"1","我是添加的3"+num));
 
-            num++;
+        num++;
 
         mAdapter.addData(0,mlist);
     }
@@ -83,6 +83,12 @@ public class ListViewActivity extends BaseActivity {
         String strNodesName = sb.toString();
         if (!TextUtils.isEmpty(strNodesName))
             Toast.makeText(this, strNodesName.substring(0, strNodesName.length()-1),Toast.LENGTH_SHORT).show();
+    }
+
+    public void delete(View view) {
+        if (mAdapter.getAllNodes().size() > 0){
+            mAdapter.removeData(node);
+        }
     }
 
 }

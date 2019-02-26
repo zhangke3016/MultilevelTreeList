@@ -11,7 +11,9 @@ Multilevel tree list for Android.
 
 > 3. 支持动态更新数据并保持原有展开/关闭状态。
 
-> 4. 支持ListView、RecyclerView。
+> 4. 支持动态移除数据并保持原有展开/关闭状态。
+
+> 5. 支持ListView、RecyclerView。
 
 ![MultilevelTreeList](gif/screen.gif)
 
@@ -28,7 +30,7 @@ Multilevel tree list for Android.
 ##### 2. 在app的build里添加依赖
 ```groovy
     dependencies {
-        implementation 'com.github.zhangke3016:MultilevelTreeList:1.0.0'
+        implementation 'com.github.zhangke3016:MultilevelTreeList:1.0.1'
     }
 ```
 
