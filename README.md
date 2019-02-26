@@ -15,7 +15,7 @@ Multilevel tree list for Android.
 
 ![MultilevelTreeList](gif/screen.gif)
 
-#USE
+## USE
 
 我们关联列表树需要有三个必须元素，当前id、父级id即pid，显示的内容。id和pid可以为int或者String以及其他类型。要显示的内容需要包装一下：
 
@@ -192,7 +192,7 @@ public class SimpleTreeRecyclerAdapter extends TreeRecyclerAdapter {
         mlist.add(new Node("223","0","我也是添加的root节点",new FileNode()));
         mAdapter.addData(0,mlist);
 ```
-**获取选中内容：**如果node的isChecked()为true，即为选中状态。
+**获取选中内容**：如果node的isChecked()为true，即为选中状态。
 
 ```
     StringBuilder sb = new StringBuilder();
