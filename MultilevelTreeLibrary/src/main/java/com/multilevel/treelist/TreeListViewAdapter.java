@@ -217,8 +217,8 @@ public abstract class TreeListViewAdapter extends BaseAdapter {
 			for (Node n:childrens){
 				removeDeleteNode(n);
 			}
-			mAllNodes.remove(node);
 		}
+		mAllNodes.remove(node);
 	}
 
 
