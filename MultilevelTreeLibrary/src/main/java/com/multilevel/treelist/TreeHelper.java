@@ -50,35 +50,83 @@ public class TreeHelper {
         return result;
     }
 
-    /**
+     /**
      * 设置Node间，父子关系;让每两个节点都比较一次，即可设置其中的关系
      */
-     private static List<Node> convetData2Node(List<Node> nodes) {
+    private static List<Node> convetData2Node(List<Node> nodes) {
+        List<Node> res = convert(nodes);
+        return res;
+    }
+     /**
+     * 设置Node间，父子关系;使用MAP优化效率
+     */
+    public static List<Node> convert(List<Node> sourceNodeList) {
+        List<Node> destNodeList = new ArrayList<Node>();
+        //第一步，找出第一级的节点
+        //1.1 统计所有节点的id
+        List<String> allIds = new ArrayList<String>();
+        Map<String, List<Node>> pIdMap = new HashMap<>();
+        for (Node tempNode : sourceNodeList) {
+            allIds.add((String) tempNode.getId());
+            //构造一个存储Pid得map.递归中直接使用键值查找
+            String pid = (String) tempNode.getpId();
+            if (pIdMap.containsKey(pid)) {
+                pIdMap.get(pid).add(tempNode);
+            } else {
+                List<Node> valueList = new ArrayList<>();
+                valueList.add(tempNode);
+                pIdMap.put(pid, valueList);
+            }
 
-        for (int i = 0; i < nodes.size(); i++) {
-            Node n = nodes.get(i);
-            for (int j = i + 1; j < nodes.size(); j++) {
-                Node m = nodes.get(j);
-                if(m.getpId() instanceof String){
-                    if (m.getpId().equals(n.getId())) {
-                        n.getChildren().add(m);
-                        m.setParent(n);
-                    } else if (m.getId().equals(n.getpId())) {
-                        m.getChildren().add(n);
-                        n.setParent(m);
-                    }
-                }else{
-                    if (m.getpId() == n.getId()) {
-                        n.getChildren().add(m);
-                        m.setParent(n);
-                    } else if (m.getId() == n.getpId()) {
-                        m.getChildren().add(n);
-                        n.setParent(m);
-                    }
-                }
+        }
+
+        //所有父节点找不到对应的都是一级id
+        for (Node sourceNode : sourceNodeList) {
+            if (!allIds.contains(sourceNode.getpId())) {
+                //从每个一级节点，递归查找children
+                Node destNode = new Node();
+                destNode.setId(sourceNode.getId());
+                destNode.setName(sourceNode.getName());
+                destNode.setpId(sourceNode.getpId());
+                destNode.setLevel(1);
+                destNode.bean = sourceNode.bean;
+                destNode.iconExpand = sourceNode.iconExpand;
+                destNode.iconNoExpand = sourceNode.iconNoExpand;
+                List<Node> myChilds = getChilderen(destNode, pIdMap);
+                destNode.setChildren(myChilds.isEmpty() ? new ArrayList<>() : myChilds);
+                destNodeList.add(destNode);
             }
         }
-        return nodes;
+        return destNodeList;
+    }
+
+
+    //    递归获取子节点
+    private static List<Node> getChilderen(Node parentNode, Map<String, List<Node>> pIdMap) {
+        List<Node> childrenList = new ArrayList<Node>();
+        //使用map来进行查找优化效率
+        if (!pIdMap.containsKey(parentNode.getId())) {
+            return childrenList;
+        } else {
+            List<Node> sourceNode = pIdMap.get(parentNode.getId());
+            for (Node node : sourceNode) {
+                Node children = new Node();
+                children.setId(node.getId());
+                children.setName(node.getName());
+                children.setpId(node.getpId());
+                children.setLevel(node.getLevel() + 1);
+                children.bean = node.bean;
+                children.iconExpand = node.iconExpand;
+                children.iconNoExpand = node.iconNoExpand;
+                children.setParent(parentNode);
+                List<Node> myChilds = getChilderen(children, pIdMap);
+                children.setChildren(myChilds.isEmpty() ? new ArrayList<>() : myChilds);
+                childrenList.add(children);
+            }
+
+            return childrenList;
+        }
+
     }
 
     private static List<Node> getRootNodes(List<Node> nodes) {
